@@ -1,0 +1,109 @@
+# =============================================================================
+# SECURITY: this repository is public. Nothing secret or device-unique may be
+# committed. The rules below are a safety net, not a substitute for review:
+# always run `git diff --cached` before committing.
+#
+# Never commit: private keys, CA seeds, join tokens, PINs, PUF activation codes,
+# PUF key codes, board/device serial numbers, SPIRE server datastores.
+# If a public cert or test fixture really must be committed, add a narrowly
+# scoped `!path/to/file` exception with a comment explaining why it is safe.
+# =============================================================================
+
+# --- Key material and certificates (any format) ------------------------------
+*.key
+*.pem
+*.der
+*.crt
+*.cer
+*.csr
+*.p8
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.gpg
+*.asc
+id_rsa*
+id_ecdsa*
+id_ed25519*
+
+# --- Key ceremony outputs (seeds, paper-backup sources, shares) --------------
+ceremony-out/
+ceremony/**/out/
+*.seed
+*seed*.txt
+*.shares
+shares/
+paper-backup*
+!docs/**/paper-backup*.md
+
+# --- SPIRE runtime state ------------------------------------------------------
+# Join tokens are single-use bearer credentials for node attestation.
+*.token
+join-token*
+join_token*
+# SPIRE server/agent data dirs: datastore, disk KeyManager keys.json, agent SVID cache.
+.data/
+spire-data/
+**/spire/data/
+keys.json
+*.sqlite3
+*.sqlite3-journal
+agent_svid.der
+bundle.der
+
+# --- Board / secenclave device-unique data ------------------------------------------
+# PUF activation codes and key codes are bound to one chip; still not for git.
+*.ac
+activation_code*
+*keycode*
+*key_code*
+# Serial numbers, UIDs, provisioning dumps, CMPA/CFPA images.
+*serial-number*
+*serial_number*
+serials.*
+device-info*
+*.uid
+cmpa*.bin
+cfpa*.bin
+# PINs / passphrases / env files.
+*.pin
+*pin.txt
+.env
+.env.*
+secrets/
+!docs/**/secrets*.md
+
+# --- Firmware build outputs (MCUXpresso / CMake / armgcc) ---------------------
+build/
+build_*/
+armgcc/debug/
+armgcc/release/
+*.elf
+*.axf
+*.bin
+*.hex
+*.srec
+*.map
+*.o
+*.a
+*.d
+CMakeCache.txt
+CMakeFiles/
+.mcuxpressoide_packages_support/
+.settings/
+
+# --- Go -------------------------------------------------------------------------
+/bin/
+*.test
+*.out
+coverage.*
+go.work.sum
+
+# --- Editors / OS ----------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
