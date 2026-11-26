@@ -9,7 +9,7 @@ This is a personal learning project. It is not production software, the
 hardware is a development board, and parts of the threat model are explicitly
 out of scope. See [docs/threat-model.md](docs/threat-model.md).
 
-> **Status:** Milestone 1 (repo skeleton and threat model). No code yet.
+> **Status:** Milestone 2 (namespace lab). See [docs/namespace-lab.md](docs/namespace-lab.md).
 
 <!-- TODO: photo of the FRDM-MCXN947 board on its dedicated secenclave link -->
 <!-- ![FRDM-MCXN947 secenclave](docs/images/secenclave-board.jpg) -->
@@ -110,7 +110,7 @@ Details: [docs/trust-levels.md](docs/trust-levels.md).
 Each milestone stops for review before the next one starts.
 
 - [x] **1. Repo skeleton.** README, license, `.gitignore`, threat model, trust levels
-- [ ] **2. Namespace lab.** Scripts to create and destroy N namespace nodes on a bridge
+- [x] **2. Namespace lab.** Scripts to create and destroy N namespace nodes on a bridge
 - [ ] **3. Software-only SPIRE baseline.** Test-only software keys; two namespace nodes talk over mTLS using SVIDs
 - [ ] **4. Board firmware.** mTLS listener, PUF-wrapped key storage, sign-digest command, signature log
 - [ ] **5. SPIRE plugins (Go).** All CA signing goes to the board; board list and failover
@@ -129,7 +129,12 @@ Each milestone stops for review before the next one starts.
 ## Repository layout
 
 ```
+scripts/
+  labctl                 create/grow/destroy namespace nodes (Milestone 2)
+  test-lab.sh            integration test for labctl (needs root, isolated names)
+  lib/common.sh          shared naming/config helpers
 docs/
+  namespace-lab.md       how namespace nodes work, firewall notes, limits
   threat-model.md        assets, adversaries, what is and is not defended
   trust-levels.md        hardware nodes vs. namespace nodes, and why it matters
   research-findings.md   verified facts behind the design (SPIRE, MCXN947, TLS)
